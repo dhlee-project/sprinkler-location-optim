@@ -50,7 +50,7 @@ tree_dict_key = [f'A_{i[1]}_{i[2]}' for i in tree_list] + [f'C_{i[1]}_{i[2]}' fo
 
 import tqdm
 datatable = np.zeros((len(list(sprinkler_value_dict.keys())), 3+len(tree_dict_key)))
-datatable.shape
+
 itr = 0
 for i in list(sprinkler_value_dict.keys()):
     s_width, s_height = sprinkler_value_dict[i][:2]

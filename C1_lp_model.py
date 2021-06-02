@@ -92,7 +92,7 @@ for z_tmp in Z_index:
 
 # constraint_3 = []
 # g = pulp.lpSum(v for v in zip(vars_x.values()))
-# constraint_3.append(g <= 20)
+# constraint_3.append(g <= 8)
 
 constraint_4 = []
 structure_loc = [f'X_{j[1]//10}_{j[2]//10}' for i in list(structure_info.keys()) for j in structure_info[i]]
@@ -116,21 +116,20 @@ for x_tmp in structure_loc:
         g += vars_x[i]
     constraint_4.append(g == 0)
 
-
-
-
-# # 물의 공급량 제약
-# constraint_4 = []
-# for y_tmp in Y_index:
-#     coefficient = data[z_tmp].values
-#     g = pulp.lpSum(c * v for c, v in zip(coefficient, vars_x.values()))
-#     constraint_4.append(g>=1)
+# 물의 공급량 제약
+constraint_5 = []
+constraint_6 = []
+for y_tmp in Y_index:
+    coefficient = data[y_tmp].values
+    g = pulp.lpSum(c * v for c, v in zip(coefficient, vars_x.values()))
+    constraint_5.append(g>=300)
+    constraint_6.append(g<=340)
 #
 
 ############################################
 # Add Constraint
 ## add constraint into model
-constraints = constraint_1 + constraint_2 + constraint_4
+constraints = constraint_1 + constraint_2 + constraint_4 + constraint_5  + constraint_6
 for i, c in enumerate(constraints):
     constraint_name = f"c_{i}"
     sprinkler_model.constraints[constraint_name] = c
@@ -154,7 +153,7 @@ result = data[['width', 'height', 'value']]
 result.loc[: , 'locate'] = 0
 for k in result_dict:
     result.loc[k, 'locate'] = result_dict[k]
-result.to_csv('./data/result.csv')
+result.to_csv('./data/result_300_340.csv')
 
 
 ############################################
@@ -188,7 +187,8 @@ for component in ['house', 'structure', 'tree', 'facility', 'sprinkler']:
     env_vis_map[1 == c_map, :] = np.array(c_color) / 255.
 
 env_dict['vis_map'] = env_vis_map
-np.save('./data/env_dict_reuslt.npy', env_dict)
+# np.save('./data/env_dict_reuslt.npy', env_dict)
 plt.imshow(env_vis_map)
+plt.imsave('./data/result_fig_300_340.jpg',env_vis_map)
 
 
