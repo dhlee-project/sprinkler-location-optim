@@ -30,7 +30,6 @@ vars_x = pulp.LpVariable.dicts(
     cat='Binary')
 
 Y_index = data.columns.values[3:3+19]
-
 vars_y = pulp.LpVariable.dicts(
     name='Y',  # prefix of each LP var
     indexs=Y_index,
@@ -39,7 +38,6 @@ vars_y = pulp.LpVariable.dicts(
 )
 
 Z_index = data.columns.values[3+19:3+19+19]
-
 vars_z = pulp.LpVariable.dicts(
     name='Z',  # prefix of each LP var
     indexs=Z_index,

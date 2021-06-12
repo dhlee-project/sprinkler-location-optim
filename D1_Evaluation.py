@@ -4,6 +4,14 @@ import pandas as pd
 import cv2
 import matplotlib.pyplot as plt
 
+def apply_mask(image, mask, color, alpha=0.4):
+    for c in range(3):
+        image[:, :, c] = np.where(mask == 1,
+                                  (1-alpha) + alpha * color[c],
+                                  image[:, :, c])
+    return image
+
+
 data = pd.read_csv('./data/value_table.csv', index_col=0)
 
 data['height'].values

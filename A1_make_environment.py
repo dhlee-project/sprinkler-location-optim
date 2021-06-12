@@ -275,6 +275,7 @@ env_dict = {'land' : land,
             'tree_obj':land_tree_obj,
             'facility': [land_facility, 4, [255, 0, 0]]
             }
+
 env_map = env_dict['land'].copy()
 env_vis_map = np.zeros((env_map.shape[0], env_map.shape[1], 3))
 for component in ['house', 'structure', 'tree', 'facility']:
