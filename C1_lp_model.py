@@ -30,20 +30,7 @@ vars_x = pulp.LpVariable.dicts(
     cat='Binary')
 
 Y_index = data.columns.values[3:3+19]
-vars_y = pulp.LpVariable.dicts(
-    name='Y',  # prefix of each LP var
-    indexs=Y_index,
-    lowBound=0,
-    cat='Integer'
-)
-
 Z_index = data.columns.values[3+19:3+19+19]
-vars_z = pulp.LpVariable.dicts(
-    name='Z',  # prefix of each LP var
-    indexs=Z_index,
-    lowBound=0,
-    cat='Integer'
-)
 
 ############################################
 # Define OBJECTIVE function
@@ -172,9 +159,8 @@ for row in result.values:
                    (int(h), int(w)),
                    20, 1, -1)
 
-# plt.imshow(land_house + land_tree + land_structure + land_facility)
-env_dict['sprinkler'] = [sprinkler, 5, [0, 0, 255]]
 
+env_dict['sprinkler'] = [sprinkler, 5, [0, 0, 255]]
 env_map = env_dict['land'].copy()
 env_vis_map = np.zeros((env_map.shape[0], env_map.shape[1], 3))
 for component in ['house', 'structure', 'tree', 'facility', 'sprinkler']:

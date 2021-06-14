@@ -288,4 +288,4 @@ for component in ['house', 'structure', 'tree', 'facility']:
 env_dict['vis_map'] = env_vis_map
 np.save('./data/env_dict.npy', env_dict)
 plt.imshow(env_vis_map)
-
+plt.imsave('./data/env.jpg', env_vis_map)
