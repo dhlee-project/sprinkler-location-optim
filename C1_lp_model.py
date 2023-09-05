@@ -16,7 +16,6 @@ sprinkler_model = pulp.LpProblem(
     name="sprinkler_model",
     sense=pulp.LpMaximize
 )
-
 ############################################
 # Define VARIABLE
 
@@ -115,6 +114,7 @@ for y_tmp in Y_index:
 # Add Constraint
 ## add constraint into model
 constraints = constraint_1 + constraint_2 + constraint_4 + constraint_5  + constraint_6
+len(constraints)
 for i, c in enumerate(constraints):
     constraint_name = f"c_{i}"
     sprinkler_model.constraints[constraint_name] = c
